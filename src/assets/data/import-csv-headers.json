@@ -1,0 +1,14 @@
+{
+  "id": {
+    "type": "integer",
+    "label": "id"
+  },
+  "not_valid": {
+    "type": "boolean",
+    "label": "Not Valid"
+  },
+  "not_valid_rationale": {
+    "type": "string",
+    "label": "Not Valid: rationale"
+  }
+}
