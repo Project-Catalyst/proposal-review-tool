@@ -33,7 +33,7 @@ function generateCsv(data) {
 }
 
 function downloadCsv(data, filename) {
-  filename = filename + '-vCA-export.csv'
+  filename = filename + '-proposerQA-export.csv'
   let csv = generateCsv(data);
   var blob = new Blob([csv], {type: "text/plain;charset=utf-8"});
   FileSaver.saveAs(blob, slugify(filename));
