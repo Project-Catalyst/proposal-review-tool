@@ -5,10 +5,10 @@
   },
   "not_valid": {
     "type": "boolean",
-    "label": "Not Valid"
+    "label": "Filtered Out"
   },
   "not_valid_rationale": {
     "type": "string",
-    "label": "Not Valid: rationale"
+    "label": "Filtered Out: rationale"
   }
 }

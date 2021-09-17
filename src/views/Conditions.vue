@@ -86,10 +86,13 @@ export default {
     }),
     fullAssessments() {
       const localAssessments = this.assessments
-      return this.originalAssessments.map(item => ({
+      let fullAssessments = this.originalAssessments.map(item => ({
         ...item,
         ...localAssessments[item.id],
       }));
+      return fullAssessments.filter(
+        (el) => (!el.blank)
+      );
     },
     filteredAssessments() {
       return this.activeFilters.length

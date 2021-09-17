@@ -47,13 +47,17 @@ csvHeaders = JSON.parse(`{
     "type": "integer",
     "label": "Auditability Rating"
   },
+  "blank": {
+    "type": "boolean",
+    "label": "Blank"
+  },
   "not_valid": {
     "type": "boolean",
-    "label": "Not Valid"
+    "label": "Filtered Out"
   },
   "not_valid_rationale": {
     "type": "string",
-    "label": "Not Valid: rationale"
+    "label": "Filtered Out: rationale"
   }
 }`);
 
