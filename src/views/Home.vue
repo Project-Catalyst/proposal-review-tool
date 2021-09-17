@@ -57,7 +57,7 @@
           </li>
         </ol>
         <p>This is the final file that you'll have to share at the end of the QA process. This file file can also be re-imported in the proposal-review-tool.<br />
-        Upload the final export to Google Docs, change the share settings to "Anyone with the link" and fill in <a href="#">this form</a> with your details and the link to your file.<br /></p>
+        Upload the final export to Google Docs, change the share settings to "Anyone with the link" and fill in <a href="https://forms.gle/aKN9biCuHGtbNdu37">this form</a> with your details and the link to your file.<br /></p>
         <p><b>Useful resources</b><br /></p>
         <p>
           <a href="https://docs.google.com/document/d/1vHapUV1LHM4cb2375V99oM32xJ-wj_XoN-DYcvKEk0A/edit?usp=sharing">QA Stage Guide</a><br />
