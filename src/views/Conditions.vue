@@ -31,8 +31,8 @@
         />
         <div
           class="button"
-          @click="currentSlice = currentSlice + 100"
-          v-if="currentSlice < currentList.length"
+          @click="incrementSlice"
+          v-if="currentSlice < filteredCount"
         >
           Load more...
         </div>
@@ -43,14 +43,11 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import shuffle from "@/utils/shuffle";
+import { mapState, mapGetters } from "vuex";
 import AssessmentPreview from "@/components/AssessmentPreview";
 import CFilter from "@/views/CFilter";
 import { EventBus } from "./../EventBus";
 import proposals from "../assets/data/proposals.json";
-import assessors from "../assets/data/assessors.json";
-import originalAssessments from "../assets/data/assessments.csv";
 
 export default {
   name: "Conditions",
@@ -60,61 +57,21 @@ export default {
   },
   data() {
     return {
-      originalAssessments: originalAssessments,
       proposals: proposals,
-      assessors: assessors,
-      prefilters: [
-        { label: "Random", v: "randomAssessments" },
-        { label: "Low reviewed (from other vCAs)", v: "lowReviewed" },
-        { label: "No reviews (from other vCAs)", v: "noReviewed" },
-        { label: "All", v: "filteredAssessments" },
-      ],
-      activeFilters: [],
-      currentPrefilter: false,
-      currentList: [],
-      currentIndex: 0,
-      currentSlice: 100,
       showList: false,
-      prefilter: "filteredAssessments",
       interval: false
     };
   },
   computed: {
     ...mapState({
       assessments: (state) => state.assessments.indexed,
-      listAssessments: (state) => state.assessments.all
+      listAssessments: (state) => state.assessments.all,
+      activeFilters: (state) => state.assessments.activeFilters,
+      activePrefilter: (state) => state.assessments.activePrefilter,
+      currentIndex: (state) => state.assessments.currentIndex,
+      currentSlice: (state) => state.assessments.currentSlice,
     }),
-    fullAssessments() {
-      const localAssessments = this.assessments
-      let fullAssessments = this.originalAssessments.map(item => ({
-        ...item,
-        ...localAssessments[item.id],
-      }));
-      return fullAssessments.filter(
-        (el) => (!el.blank)
-      );
-    },
-    filteredAssessments() {
-      return this.activeFilters.length
-        ? this.customFilter(this.fullAssessments, this.activeFilters)
-        : this.fullAssessments;
-    },
-    randomAssessments() {
-      return shuffle(this.filteredAssessments);
-    },
-    lowReviewed() {
-      return this.filteredAssessments
-        .filter((el) => el.reviews <= 4)
-        .sort((a, b) => a.reviews - b.reviews);
-    },
-    noReviewed() {
-      return this.filteredAssessments.filter(
-        (el) => (el.reviews === 0) || (!el.reviews)
-      );
-    },
-    renderedList() {
-      return this.currentList.slice(0, this.currentSlice);
-    },
+    ...mapGetters("assessments", ["renderedList", "filteredCount"]),
     proposalsById() {
       return this.proposals.reduce(
         (obj, item) => Object.assign(obj, { [item.title]: item.id }),
@@ -126,7 +83,7 @@ export default {
         proposal_id: {
           key: "proposal_id",
           label: "Proposal",
-          comparision: (a, v) => parseInt(a) === parseInt(v),
+          comparison: 'sameInt',
           value: false,
           values: this.proposalsById,
         }
@@ -137,61 +94,44 @@ export default {
     }
   },
   methods: {
-    setList(el) {
-      this.currentSlice = 100;
-      this.currentIndex = 0;
-      this.currentPrefilter = el;
-      this.currentList = this[el.v];
-    },
-    updateList() {
-      this.currentList = this[this.currentPrefilter.v];
+    setList() {
+      this.$store.commit('assessments/setSlice', 100)
+      this.$store.commit('assessments/setIndex', 0)
     },
     getNext() {
       this.$router.push({
         name: "assessment",
         params: { id: this.currentList[this.currentIndex].id },
       });
-      this.currentIndex = this.currentIndex + 1;
+      this.$store.commit('assessments/incrementIndex')
     },
     setNext(index) {
-      this.currentIndex = index + 1;
+      this.$store.commit('assessments/setIndex', index + 1)
+    },
+    incrementSlice() {
+      this.$store.commit('assessments/incrementSlice')
     },
     updateFilter(prop, value) {
-      const newFilter = Object.assign({}, prop);
-      newFilter.value = value;
-      this.activeFilters.push(newFilter);
-      this.setList(this.currentPrefilter);
+      this.$store.commit('assessments/addFilter', {
+        prop,
+        value
+      })
+      this.setList();
     },
     removeFilter(f) {
-      const idx = this.activeFilters.indexOf(f);
-      if (idx > -1) {
-        this.activeFilters.splice(idx, 1);
-        this.setList(this.currentPrefilter);
-      }
-    },
-    customFilter(data, filters) {
-      const [current, ...newFilters] = filters;
-      const filtered = data.filter((el) =>
-        current.comparision(current.value, el[current.key], el)
-      );
-      if (filters.length > 1) {
-        return this.customFilter(filtered, newFilters);
-      } else {
-        return filtered;
-      }
+      this.$store.commit('assessments/removeFilter', f)
+      this.setList();
     },
 
   },
   mounted() {
-    this.setList({ label: "All", v: "filteredAssessments" });
+    this.setList();
     EventBus.$on("next-assessment", this.getNext);
     EventBus.$on("set-assessment-index", this.setNext);
-    EventBus.$on("update-list", this.updateList);
   },
   destroyed() {
     EventBus.$off("next-assessment");
     EventBus.$off("set-assessment-index");
-    EventBus.$off("update-list");
   }
 };
 </script>
