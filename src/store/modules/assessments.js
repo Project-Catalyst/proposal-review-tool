@@ -1,3 +1,4 @@
+import Vue from "vue";
 import originalAssessments from "@/assets/data/assessments.csv"
 import comparisons from "@/utils/comparisons"
 import router from '@/router'
@@ -5,7 +6,6 @@ import router from '@/router'
 // initial state
 const getDefaultState = () => ({
   all: [],
-  indexed: {},
   activeFilters: [],
   activePrefilter: {label: "All", v: 'std'},
   currentIndex: 0,
@@ -17,13 +17,22 @@ const state = getDefaultState()
 
 // getters
 const getters = {
-  getById: (state) => (id) => {
-    return state.indexed[id]
+  getById: (state, _, rootState, rootGetters) => (id) => {
+    let filteredById = rootGetters['assessments/filteredById']
+    return filteredById[id]
   },
-  fullAssessments: (state) => {
+  indexed: (state) => {
+    let result = {}
+    state.all.forEach(el => {
+      result[el.id] = el
+    })
+    return result
+  },
+  fullAssessments: (state, _, rootState, rootGetters) => {
+    const indexed = rootGetters['assessments/indexed']
     let fullAssessments = originalAssessments.map(item => ({
       ...item,
-      ...state.indexed[item.id],
+      ...indexed[item.id],
     }));
     return fullAssessments.filter(
       (el) => (!el.blank)
@@ -37,6 +46,14 @@ const getters = {
       )
     })
     return comparisons[state.activePrefilter.v](filtered)
+  },
+  filteredById: (state, _, rootState, rootGetters) => {
+    let result = {}
+    let filtered = rootGetters['assessments/filteredAssessments']
+    filtered.forEach(el => {
+      result[el.id] = el
+    })
+    return result
   },
   renderedList: (state, _, rootState, rootGetters) => {
     return rootGetters['assessments/filteredAssessments'].slice(0, state.currentSlice)
@@ -80,29 +97,24 @@ const actions = {
 const mutations = {
   setAssessments (state, assessments) {
     state.all = assessments
-    this.commit('assessments/setIndexed', assessments)
-  },
-  setIndexed (state, assessments) {
-    let result = {}
-    assessments.forEach(el => {
-
-      result[el.id] = el
-    })
-    state.indexed = result
   },
   resetState (state) {
     Object.assign(state, getDefaultState())
   },
   setReview(state, data) {
-    const assessment = state.all.find(a => parseInt(a.id) === parseInt(data.id));
-    if (assessment) {
+    const assessmentId = state.all.findIndex(a => parseInt(a.id) === parseInt(data.id));
+    if (assessmentId != -1) {
+      let assessment = {...state.all[assessmentId]}
       assessment.not_valid = data.value;
+      Vue.set(state.all, assessmentId, assessment)
     }
   },
   setRationaleReview(state, data) {
-    const assessment = state.all.find(a => parseInt(a.id) === parseInt(data.id));
-    if (assessment) {
+    const assessmentId = state.all.findIndex(a => parseInt(a.id) === parseInt(data.id));
+    if (assessmentId != -1) {
+      let assessment = {...state.all[assessmentId]}
       assessment.not_valid_rationale = data.value;
+      Vue.set(state.all, assessmentId, assessment)
     }
   },
   addFilter(state, {prop, value}) {

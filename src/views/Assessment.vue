@@ -1,22 +1,16 @@
 <template>
   <b-modal class="assessment"
+    :key="`modal-${assessment.id}`"
     :ref="'modal'"
     v-model="isOpen"
     :can-cancel="false"
+    :animation="'no-animation'"
     full-screen
     >
     <div class="card container custom-card" v-if="assessment">
-      <!-- <div class="card-image">
-        <figure class="image is-4by3">
-          <img
-            src="https://via.placeholder.com/1280x960"
-            :alt="proposal.title"
-          />
-        </figure>
-      </div> -->
       <div class="card-content">
         <p class="title is-4">
-          {{ proposal.title }} <span class="is-size-5 has-text-weight-bold">(<a :href="proposal.url" target="_blank">See proposal in IdeaScale</a>)</span>
+          {{ assessment.title }} <span class="is-size-5 has-text-weight-bold">(<a :href="assessment.url" target="_blank">See proposal in IdeaScale</a>)</span>
         </p>
         <p class="subtitle is-5">{{ category.title }}</p>
         <p class="is-6">
@@ -86,8 +80,7 @@
 <script>
 import { mapGetters, mapState } from "vuex";
 import proposals from "../assets/data/proposals.json";
-import categories from "../assets/data/categories.json";
-import originalAssessments from "../assets/data/assessments.csv";
+import categories from "../assets/data/categoriesById.json";
 import debounce from 'lodash.debounce';
 
 
@@ -95,7 +88,6 @@ export default {
   name: "Assessment",
   data() {
     return {
-      originalAssessments: originalAssessments,
       proposals: proposals,
       categories: categories,
       isOpen: true
@@ -106,37 +98,12 @@ export default {
     ...mapState({
       profile: (state) => state.profile
     }),
-    mappedAssessments() {
-      let result = {}
-      this.originalAssessments.forEach(el => {
-        result[el.id] = el
-      })
-      return result
-    },
     assessment() {
-      const fullAssessment = this.mappedAssessments[this.$route.params.id]
-      const localAssessment = this.getById(this.$route.params.id)
-      return {...fullAssessment, ...localAssessment}
-    },
-    proposal() {
-      if (this.assessment) {
-        let filtered = this.proposals.filter(
-          (p) => p.id === parseInt(this.assessment.proposal_id)
-        );
-        if (filtered.length) {
-          return filtered[0];
-        }
-      }
-      return false;
+      return this.getById(this.$route.params.id)
     },
     category() {
-      if (this.proposal) {
-        let filtered = this.categories.filter(
-          (c) => c.id === parseInt(this.proposal.category)
-        );
-        if (filtered.length) {
-          return filtered[0];
-        }
+      if (this.assessment) {
+        return this.categories[this.assessment.challenge_id]
       }
       return false;
     },
@@ -170,7 +137,7 @@ export default {
     getNext() {
       this.$store.dispatch('assessments/getNext')
     },
-  },
+  }
 };
 </script>
 
