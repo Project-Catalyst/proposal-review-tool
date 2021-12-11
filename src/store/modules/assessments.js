@@ -1,5 +1,6 @@
 import originalAssessments from "@/assets/data/assessments.csv"
 import comparisons from "@/utils/comparisons"
+import router from '@/router'
 
 // initial state
 const getDefaultState = () => ({
@@ -47,6 +48,22 @@ const getters = {
 
 // actions
 const actions = {
+  getNext({ commit, state, getters }) {
+    let fAssessments = getters.filteredAssessments
+    if (fAssessments[state.currentIndex]) {
+      let newId = fAssessments[state.currentIndex].id
+      let currentId = false
+      if (router.currentRoute.name === 'assessment') {
+        currentId = router.currentRoute.params.id
+      }
+      if (newId !== currentId) {
+        router.push({ name: 'assessment', params:{ id: newId }})
+      }
+      commit('incrementIndex')
+    } else {
+      commit('setIndex', 0)
+    }
+  },
 }
 
 // mutations

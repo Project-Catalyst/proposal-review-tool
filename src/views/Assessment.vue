@@ -91,8 +91,6 @@ import originalAssessments from "../assets/data/assessments.csv";
 import debounce from 'lodash.debounce';
 
 
-import { EventBus } from "./../EventBus";
-
 export default {
   name: "Assessment",
   data() {
@@ -170,7 +168,7 @@ export default {
       return this;
     },
     getNext() {
-      EventBus.$emit("next-assessment");
+      this.$store.dispatch('assessments/getNext', false)
     },
   },
 };

@@ -46,7 +46,6 @@
 import { mapState, mapGetters } from "vuex";
 import AssessmentPreview from "@/components/AssessmentPreview";
 import CFilter from "@/views/CFilter";
-import { EventBus } from "./../EventBus";
 import proposals from "../assets/data/proposals.json";
 
 export default {
@@ -99,14 +98,7 @@ export default {
       this.$store.commit('assessments/setIndex', 0)
     },
     getNext() {
-      this.$router.push({
-        name: "assessment",
-        params: { id: this.currentList[this.currentIndex].id },
-      });
-      this.$store.commit('assessments/incrementIndex')
-    },
-    setNext(index) {
-      this.$store.commit('assessments/setIndex', index + 1)
+      this.$store.dispatch('assessments/getNext')
     },
     incrementSlice() {
       this.$store.commit('assessments/incrementSlice')
@@ -126,12 +118,8 @@ export default {
   },
   mounted() {
     this.setList();
-    EventBus.$on("next-assessment", this.getNext);
-    EventBus.$on("set-assessment-index", this.setNext);
   },
   destroyed() {
-    EventBus.$off("next-assessment");
-    EventBus.$off("set-assessment-index");
   }
 };
 </script>
