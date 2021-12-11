@@ -168,7 +168,7 @@ export default {
       return this;
     },
     getNext() {
-      this.$store.dispatch('assessments/getNext', false)
+      this.$store.dispatch('assessments/getNext')
     },
   },
 };

@@ -64,6 +64,16 @@ const actions = {
       commit('setIndex', 0)
     }
   },
+  goTo({ commit }, {newId, newIdx}) {
+    let currentId = false
+    if (router.currentRoute.name === 'assessment') {
+      currentId = router.currentRoute.params.id
+    }
+    if (newId !== currentId) {
+      router.push({ name: 'assessment', params:{ id: newId }})
+      commit('setIndex', newIdx)
+    }
+  }
 }
 
 // mutations
