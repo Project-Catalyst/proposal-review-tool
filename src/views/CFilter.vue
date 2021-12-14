@@ -12,6 +12,7 @@
               :data="filteredDataArray(v.values)"
               placeholder="Search Proposals"
               icon="magnify"
+              :open-on-focus="true"
               clearable
               @select="option => updateAutocomplete(option, v)">
               <template #empty>No results found</template>

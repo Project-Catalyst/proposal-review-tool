@@ -17,12 +17,12 @@
             type="is-primary"
             inverted
             outlined
-            @click="showList = !showList"
+            @click="toggleList"
             >{{ showListLabel }}</b-button
           >
         </div>
       </div>
-      <div class="assessments-list" v-if="showList">
+      <div class="assessments-list" v-if="listVisible">
         <assessment-preview
           v-for="(assessment, idx) in renderedList"
           :key="`ass-${assessment.id}`"
@@ -69,6 +69,7 @@ export default {
       activePrefilter: (state) => state.assessments.activePrefilter,
       currentIndex: (state) => state.assessments.currentIndex,
       currentSlice: (state) => state.assessments.currentSlice,
+      listVisible: (state) => state.assessments.listVisible
     }),
     ...mapGetters("assessments", ["renderedList", "filteredCount"]),
     proposalsById() {
@@ -89,7 +90,7 @@ export default {
       };
     },
     showListLabel() {
-      return (this.showList) ? 'Close list' : 'Show list'
+      return (this.listVisible) ? 'Close list' : 'Show list'
     }
   },
   methods: {
@@ -114,10 +115,13 @@ export default {
       this.$store.commit('assessments/removeFilter', f)
       this.setList();
     },
+    toggleList() {
+      this.$store.commit('assessments/toggleList')
+    }
 
   },
   mounted() {
-    this.setList();
+    // this.setList();
   },
   destroyed() {
   }

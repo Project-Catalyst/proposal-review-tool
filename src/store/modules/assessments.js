@@ -9,7 +9,8 @@ const getDefaultState = () => ({
   activeFilters: [],
   activePrefilter: {label: "All", v: 'std'},
   currentIndex: 0,
-  currentSlice: 100
+  currentSlice: 100,
+  listVisible: false
 })
 
 
@@ -151,6 +152,9 @@ const mutations = {
   },
   incrementSlice(state) {
     state.currentSlice = state.currentSlice + 100
+  },
+  toggleList(state) {
+    state.listVisible = !state.listVisible
   }
 }
 
