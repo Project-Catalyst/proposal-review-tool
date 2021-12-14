@@ -107,6 +107,11 @@ const mutations = {
       let assessment = {...state.all[assessmentId]}
       assessment.not_valid = data.value;
       Vue.set(state.all, assessmentId, assessment)
+    } else {
+      state.all.push({
+        id: data.id,
+        not_valid: data.value
+      })
     }
   },
   setRationaleReview(state, data) {
@@ -115,6 +120,11 @@ const mutations = {
       let assessment = {...state.all[assessmentId]}
       assessment.not_valid_rationale = data.value;
       Vue.set(state.all, assessmentId, assessment)
+    } else {
+      state.all.push({
+        id: data.id,
+        not_valid_rationale: data.value
+      })
     }
   },
   addFilter(state, {prop, value}) {
