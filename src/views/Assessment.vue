@@ -53,25 +53,51 @@
             <b-field>
               <b-checkbox v-model="review"
                 native-value="not_valid"
+                @click.native="saveStatus = 'Saving...'"
                 size="is-large"
                 type="is-danger is-light is-outlined">
                 Filtered Out
               </b-checkbox>
             </b-field>
-            <b-field label="Your rationale for the report:">
-              <b-input type="textarea" v-model="debouncedRationale"></b-input>
+            <b-field
+              :type="(!navigationAvailable) ? 'is-danger' : ''"
+              :message="(!navigationAvailable) ? 'Please fill out this field.' : ''"
+              label="Your rationale for the report OR your feedback to CA if not reported:">
+              <b-input
+                type="textarea"
+                @keydown.native="saveStatus = 'Saving...'"
+                v-model="debouncedRationale"></b-input>
             </b-field>
+            <b-tag icon="content-save-outline" v-if="assessment.id">
+              {{saveStatus}}
+            </b-tag>
           </section>
         </div>
       </div>
       <footer class="card-footer custom-footer">
-        <router-link class="card-footer-item" :to="{ name: 'conditions' }">
-          Overview
-        </router-link>
+        <b-tooltip multilined type="is-warning is-light"
+          :active="!navigationAvailable">
+          <router-link class="card-footer-item"
+            :to="{ name: 'conditions' }"
+            :class="{'link-disabled': !navigationAvailable}">
+            Overview
+          </router-link>
+          <template v-slot:content>
+            Please fill all the required fields to continue.
+          </template>
+        </b-tooltip>
 
-        <a @click="getNext" class="card-footer-item">
-          Next
-        </a>
+        <b-tooltip multilined type="is-warning is-light"
+          :active="!navigationAvailable">
+          <a @click="getNext"
+            class="card-footer-item"
+            :class="{'link-disabled': !navigationAvailable}">
+            Next
+          </a>
+          <template v-slot:content>
+            Please fill all the required fields to continue.
+          </template>
+        </b-tooltip>
       </footer>
     </div>
   </b-modal>
@@ -90,7 +116,8 @@ export default {
     return {
       proposals: proposals,
       categories: categories,
-      isOpen: true
+      isOpen: true,
+      saveStatus: 'Saved'
     };
   },
   computed: {
@@ -110,6 +137,20 @@ export default {
       }
       return false;
     },
+    rationaleRequired() {
+      return this.review
+    },
+    navigationAvailable() {
+      if (this.review) {
+        if (this.debouncedRationale) {
+          if (this.debouncedRationale.length > 0) {
+            return true
+          }
+        }
+        return false
+      }
+      return true
+    },
     review: {
       get() {
         return this.assessment.not_valid
@@ -119,6 +160,7 @@ export default {
           id: this.$route.params.id,
           value: val
         });
+        setTimeout(() => this.saveStatus = 'Saved', 0)
       }
     },
     debouncedRationale: {
@@ -130,6 +172,7 @@ export default {
           id: this.$route.params.id,
           value: val
         });
+        this.saveStatus = 'Saved'
       }, 500)
     }
   },
@@ -174,6 +217,9 @@ export default {
   background: #fff;
   width: 100%;
   z-index: 10;
+  .b-tooltip {
+    width: 50%;
+  }
 }
 .custom-card {
   padding-bottom: 60px;
@@ -182,6 +228,10 @@ export default {
   .tooltip-content {
     width: 500px;
   }
+}
+.link-disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 </style>
 <style lang="scss">
