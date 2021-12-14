@@ -7,15 +7,15 @@
     :animation="'no-animation'"
     full-screen
     >
-    <div class="card container custom-card" v-if="assessment">
+    <div class="card container custom-card" v-if="fullAssessment">
       <div class="card-content">
         <p class="title is-4">
-          {{ assessment.title }} <span class="is-size-5 has-text-weight-bold">(<a :href="assessment.url" target="_blank">See proposal in IdeaScale</a>)</span>
+          {{ fullAssessment.title }} <span class="is-size-5 has-text-weight-bold">(<a :href="fullAssessment.url" target="_blank">See proposal in IdeaScale</a>)</span>
         </p>
         <p class="subtitle is-5">{{ category.title }}</p>
         <p class="is-6">
           <strong>Assessor:</strong>
-          {{ assessment.assessor }}
+          {{ fullAssessment.assessor }}
         </p>
 
         <div class="columns is-multiline is-mobile">
@@ -27,22 +27,22 @@
             <p class="title is-6 mb-4">
               Impact / Alignment
             </p>
-            <b-rate size="is-medium" v-model="assessment.impact_rating" disabled />
-            <p class="subtitle is-6 mb-2">{{ assessment.impact_note }}</p>
+            <b-rate size="is-medium" v-model="fullAssessment.impact_rating" disabled />
+            <p class="subtitle is-6 mb-2">{{ fullAssessment.impact_note }}</p>
           </div>
           <div class="column is-one-quarter">
           </div>
           <div class="column is-three-quarters">
             <p class="title is-6 mb-4">Feasibility</p>
-            <b-rate size="is-medium" v-model="assessment.feasibility_rating" disabled />
-            <p class="subtitle is-6 mb-2">{{ assessment.feasibility_note }}</p>
+            <b-rate size="is-medium" v-model="fullAssessment.feasibility_rating" disabled />
+            <p class="subtitle is-6 mb-2">{{ fullAssessment.feasibility_note }}</p>
           </div>
           <div class="column is-one-quarter">
           </div>
           <div class="column is-three-quarters">
             <p class="title is-6 mb-4">Auditability</p>
-            <b-rate size="is-medium" v-model="assessment.auditability_rating" disabled />
-            <p class="subtitle is-6 mb-2">{{ assessment.auditability_note }}</p>
+            <b-rate size="is-medium" v-model="fullAssessment.auditability_rating" disabled />
+            <p class="subtitle is-6 mb-2">{{ fullAssessment.auditability_note }}</p>
           </div>
           <div class="column is-one-quarter">
           </div>
@@ -94,16 +94,19 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("assessments", ["getById"]),
+    ...mapGetters("assessments", ["getById", "getFullById"]),
     ...mapState({
       profile: (state) => state.profile
     }),
     assessment() {
       return this.getById(this.$route.params.id)
     },
+    fullAssessment() {
+      return this.getFullById(this.$route.params.id)
+    },
     category() {
-      if (this.assessment) {
-        return this.categories[this.assessment.challenge_id]
+      if (this.fullAssessment) {
+        return this.categories[this.fullAssessment.challenge_id]
       }
       return false;
     },

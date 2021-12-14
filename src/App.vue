@@ -60,15 +60,18 @@ export default {
   computed: {
     ...mapState({
       profile: (state) => state.profile,
-      assessments: (state) => state.assessments.indexed
+      assessments: (state) => state.assessments.all,
     })
   },
   methods: {
     exportCsv() {
-      const localAssessments = this.assessments
-      const assessmentsExport = this.originalAssessments.map(item => ({
+      let originalAssessmentsIndexed = {}
+      this.originalAssessments.forEach(el => {
+        originalAssessmentsIndexed[el.id] = el
+      })
+      const assessmentsExport = this.assessments.map(item => ({
+        ...originalAssessmentsIndexed[item.id],
         ...item,
-        ...localAssessments[item.id],
       }));
       downloadCsv(assessmentsExport, this.profile.info.name)
     }

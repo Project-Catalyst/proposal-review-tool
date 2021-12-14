@@ -18,6 +18,10 @@ const state = getDefaultState()
 // getters
 const getters = {
   getById: (state, _, rootState, rootGetters) => (id) => {
+    let indexed = rootGetters['assessments/indexed']
+    return (indexed[id]) ? indexed[id] : {}
+  },
+  getFullById: (state, _, rootState, rootGetters) => (id) => {
     let filteredById = rootGetters['assessments/filteredById']
     return filteredById[id]
   },
@@ -28,13 +32,8 @@ const getters = {
     })
     return result
   },
-  fullAssessments: (state, _, rootState, rootGetters) => {
-    const indexed = rootGetters['assessments/indexed']
-    let fullAssessments = originalAssessments.map(item => ({
-      ...item,
-      ...indexed[item.id],
-    }));
-    return fullAssessments.filter(
+  fullAssessments: () => {
+    return originalAssessments.filter(
       (el) => (!el.blank)
     );
   },
