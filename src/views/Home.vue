@@ -32,31 +32,36 @@
     <b-message>
       <div class="content">
         <p><b>How it works</b><br /></p>
-        <p>The proposal-review-tool is designed to work in parallel with the standard way (using the Google Sheet) in order to provide a better user experience.<br />
-        Consider it as an experiment that hopefully will be used as the standard method in the next funds.<br /><br /></p>
+        <p>The proposal-review-tool is designed to work in parallel with the standard way (using the Google Sheet) to offer a better user experience to the process.<br />
+        Consider it as an experiment that hopefully can be used as the standard method in the future funds.<br /><br /></p>
         <ol>
           <li>
-            From the QA proposers email you'll receive the Google Sheet link for the Proposers Master File: instead of following the standard procedure, save the Proposer Master File as a CSV (File -> Download -> Comma-separated value).
+            Click on the "Start Process" button.
           </li>
           <li>
-            Click on the "Start Process" button, fill the form and upload the file you've just downloaded.<br />
+            On the next screen fill in your details: "IdeaScale username" & "email address".<br />
+            Choose an option to start your process:
+            <ol type="a" class="mt-0">
+              <li>"I want to start the process from the beginning, I don't have a backup file to import". <u>This create a clean review space</u>.</li>
+              <li>I want to continue the process, I have a backup file to import". <u>This will allow you to import a previous exported session</u>.</li>
+            </ol>
           </li>
           <li>
-            Click "Import data" and the tool will load all the CA assessments in the browser.<br />
+            Search for and select your proposals (please only review the proposals you are a proposer on, otherwise your reviews will be excluded).
           </li>
           <li>
-            After that you will access to the "Assessments list view".<br />Select your proposal and flag the assessments if you think they are out of guidelines and should be filtered out.<br />
-            The vCAs will review your reports and the assessments.
+            Review the CA assessment, if it is acceptable continue with the next assessment or finish the process.<br />
+            If an assessment requires attention from the Community QA participants (vCAs) flag it and provide your reason for doing so (provide a reason is mandatory in case of flagging).<br />
+            You can use this space to provide feedback (both positive and constructive criticism) to the CA without flagging the assessment.
           </li>
           <li>
-            Clicking on the "Next" button, you will access to the "Assessment View" where you can review the assessment flagging them as "Filtered" out and providing a rationale for your report.<br />
+            When your review is complete from the menu click "Export CSV", save the file.
           </li>
           <li>
-            When you've finished your work, you have to click on top right "Proposal Review Tool" menu and select "Export CSV".<br />
+            This is the final file that you'll have to share at the end of the QA process. This file file can also be re-imported in the proposal-review-tool to edit/check/continue your reviews.<br />
+            Upload the final export to Google Docs, change the share settings to "Anyone with the link" and fill in <a href="#">this form</a> with your details and the link to your file.
           </li>
         </ol>
-        <p>This is the final file that you'll have to share at the end of the QA process. This file file can also be re-imported in the proposal-review-tool.<br />
-        Upload the final export to Google Docs, change the share settings to "Anyone with the link" and fill in <a href="https://forms.gle/aKN9biCuHGtbNdu37">this form</a> with your details and the link to your file.<br /></p>
         <p><b>Useful resources</b><br /></p>
         <p>
           <a href="https://docs.google.com/document/d/1vHapUV1LHM4cb2375V99oM32xJ-wj_XoN-DYcvKEk0A/edit?usp=sharing">QA Stage Guide</a><br />
