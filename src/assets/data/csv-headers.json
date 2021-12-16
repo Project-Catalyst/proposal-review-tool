@@ -7,6 +7,10 @@
     "type": "string",
     "label": "Idea Title"
   },
+  "challenge": {
+    "type": "string",
+    "label": "Challenge"
+  },
   "url": {
     "type": "string",
     "label": "Idea URL"
@@ -14,6 +18,10 @@
   "assessor": {
     "type": "string",
     "label": "Assessor"
+  },
+  "triplet_id": {
+    "type": "string",
+    "label": "triplet_id"
   },
   "proposal_id": {
     "type": "integer",
@@ -53,6 +61,6 @@
   },
   "not_valid_rationale": {
     "type": "string",
-    "label": "Filtered Out: rationale"
+    "label": "Filtered Out rationale or Feedback"
   }
 }
