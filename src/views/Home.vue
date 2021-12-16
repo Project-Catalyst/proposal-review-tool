@@ -1,8 +1,7 @@
 <template>
   <div class="section container">
     <b-message>
-      <p>This is an app to help proposers to review the assessments received. It's currently in
-      early development. Please report any bugs.</p>
+      <p>This tool is designed to help proposers to review the CA assessments they received. It's a community made tool for the community. Please report any bugs.</p>
     </b-message>
 
     <b-message type="is-warning" has-icon>
