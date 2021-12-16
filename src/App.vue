@@ -47,45 +47,20 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import downloadCsv from "@/utils/export-csv";
-import originalAssessments from "@/assets/data/assessments.csv";
+
+import DownloadMixin from '@/mixins/download'
 
 export default {
-  data() {
-    return {
-      originalAssessments: originalAssessments
-    }
-  },
-  computed: {
-    ...mapState({
-      profile: (state) => state.profile,
-      assessments: (state) => state.assessments.all,
-    })
-  },
-  methods: {
-    exportCsv() {
-      let originalAssessmentsIndexed = {}
-      this.originalAssessments.forEach(el => {
-        originalAssessmentsIndexed[el.id] = el
-      })
-      const assessmentsExport = this.assessments.map(item => ({
-        ...originalAssessmentsIndexed[item.id],
-        ...item,
-      }));
-      downloadCsv(assessmentsExport, this.profile.info.name)
-    }
-  },
+  mixins: [DownloadMixin],
   mounted() {
     if (window.localStorage) {
-      let oldKey = window.localStorage.getItem('vca-tool-f4')
-      if (oldKey) {
-        window.localStorage.removeItem('vca-tool-f4')
-      }
-      let oldKey2 = window.localStorage.getItem('vca-tool-f5')
-      if (oldKey2) {
-        window.localStorage.removeItem('vca-tool-f5')
-      }
+      let oldKeys = ['vca-tool-f4', 'vca-tool-f5', 'vca-tool-f6']
+      oldKeys.forEach((k) => {
+        let oldKey = window.localStorage.getItem(k)
+        if (oldKey) {
+          window.localStorage.removeItem(k)
+        }
+      })
     }
   }
 };

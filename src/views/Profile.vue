@@ -72,6 +72,11 @@
         <p>Be careful, this operation is not reversible!</p>
         <b-button type="is-danger mt-5" @click="confirmClear">Clear local database</b-button>
       </b-message>
+      <b-button
+        v-if="localDb"
+        type="is-primary"
+        @click="exportCsv">
+        Export CSV</b-button>
     </section>
   </article>
 </template>
@@ -79,9 +84,11 @@
 <script>
 import { mapState } from "vuex";
 import csvHeaders from "../assets/data/import-csv-headers.json";
+import DownloadMixin from '@/mixins/download'
 
 export default {
   name: "Profile",
+  mixins: [DownloadMixin],
   data() {
     return {
       csv: null,
@@ -93,7 +100,6 @@ export default {
     ...mapState({
       initialized: (state) => state.profile.initialized,
       localDb: (state) => state.profile.localDb,
-      assessments: (state) => state.assessments.all,
     }),
     name: {
       get() {
