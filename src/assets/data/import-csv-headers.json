@@ -9,6 +9,6 @@
   },
   "not_valid_rationale": {
     "type": "string",
-    "label": "Filtered Out: rationale"
+    "label": "Filtered Out rationale or Feedback"
   }
 }
