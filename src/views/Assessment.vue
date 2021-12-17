@@ -106,7 +106,7 @@
 <script>
 import { mapGetters, mapState } from "vuex";
 import proposals from "../assets/data/proposals.json";
-import categories from "../assets/data/categoriesById.json";
+import categories from "../assets/data/categoriesByName.json";
 import debounce from 'lodash.debounce';
 
 
@@ -133,7 +133,7 @@ export default {
     },
     category() {
       if (this.fullAssessment) {
-        return this.categories[this.fullAssessment.challenge_id]
+        return this.categories[this.fullAssessment.challenge]
       }
       return false;
     },
