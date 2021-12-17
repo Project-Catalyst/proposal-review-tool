@@ -67,16 +67,25 @@
           >Import Data</b-button
         >
       </div>
+      <b-button
+        v-if="localDb"
+        class="mr-3 mt-3"
+        type="is-primary is-light"
+        @click="exportCsv">
+        Save / Export CSV</b-button>
+      <b-button
+        class="mt-3"
+        tag="router-link"
+        to="/assessments"
+        v-if="localDb"
+        type="is-primary"
+        >
+        Back to assessments</b-button>
       <b-message type="is-danger mt-5" v-if="localDb">
         <p>You've already loaded the CSV. Use this button to clear the database from your browser.</p>
         <p>Be careful, this operation is not reversible!</p>
         <b-button type="is-danger mt-5" @click="confirmClear">Clear local database</b-button>
       </b-message>
-      <b-button
-        v-if="localDb"
-        type="is-primary"
-        @click="exportCsv">
-        Export CSV</b-button>
     </section>
   </article>
 </template>
