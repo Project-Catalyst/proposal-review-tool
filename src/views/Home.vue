@@ -59,7 +59,7 @@
           </li>
           <li>
             This is the final file that you'll have to share at the end of the QA process. This file file can also be re-imported in the proposal-review-tool to edit/check/continue your reviews.<br />
-            Upload the final export to Google Docs, change the share settings to "Anyone with the link" and fill in <a href="https://forms.gle/qDXnga4EX1aVsPoB6" target="_blank">this form</a> with your details and the link to your file.
+            Upload the final export to Google Docs, raname it including you proposal title, change the share settings to "Anyone with the link" and fill in <a href="https://forms.gle/qDXnga4EX1aVsPoB6" target="_blank">this form</a> with your details and the link to your file.
           </li>
         </ol>
         <p><b>Useful resources</b><br /></p>
