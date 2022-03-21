@@ -19,12 +19,11 @@
 
     </b-message>
 
-    <div class="buttons">
+    <div class="buttons is-centered">
       <b-button
         type="is-primary"
         tag="router-link"
         :to="{ name: buttonInfo.link }"
-        expanded
       >
         {{ buttonInfo.text }}</b-button
       >
