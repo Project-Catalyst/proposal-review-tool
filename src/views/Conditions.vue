@@ -20,6 +20,10 @@
             @click="toggleList"
             >{{ showListLabel }}</b-button
           >
+          <b-button type="is-primary" 
+            inverted
+            outlined 
+            @click="exportButton">Export</b-button>
         </div>
       </div>
       <div class="assessments-list" v-if="listVisible">
@@ -100,6 +104,9 @@ export default {
     },
     getNext() {
       this.$store.dispatch('assessments/getNext')
+    },
+    exportButton() {
+      alert('! Function not implemented')
     },
     incrementSlice() {
       this.$store.commit('assessments/incrementSlice')

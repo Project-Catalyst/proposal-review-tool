@@ -21,6 +21,9 @@
           <b-navbar-item @click="exportCsv" v-if="profile.localDb">
             Export CSV
           </b-navbar-item>
+          <b-navbar-item tag="router-link" :to="{ name: 'home' }"> <!--Insert here the router name to the Instructions page -->
+            Instructions
+          </b-navbar-item>
           <!--<b-navbar-item tag="router-link" :to="{ name: 'stats' }">
             Statistics
           </b-navbar-item>-->

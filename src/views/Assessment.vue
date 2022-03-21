@@ -80,7 +80,7 @@
           <router-link class="card-footer-item"
             :to="{ name: 'conditions' }"
             :class="{'link-disabled': !navigationAvailable}">
-            Overview
+            Assessments list / Overview
           </router-link>
           <template v-slot:content>
             Please fill all the required fields to continue.
