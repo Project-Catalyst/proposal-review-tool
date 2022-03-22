@@ -20,10 +20,14 @@
             @click="toggleList"
             >{{ showListLabel }}</b-button
           >
-          <b-button type="is-primary" 
+          <b-button
+            type="is-primary"
             inverted
             outlined 
-            @click="exportButton">Export</b-button>
+            v-if="localDb"
+            @click="exportCsv"
+            >
+            Save / Export CSV</b-button>
         </div>
       </div>
       <div class="assessments-list" v-if="listVisible">
@@ -51,9 +55,11 @@ import { mapState, mapGetters } from "vuex";
 import AssessmentPreview from "@/components/AssessmentPreview";
 import CFilter from "@/views/CFilter";
 import proposals from "../assets/data/proposals.json";
+import DownloadMixin from '@/mixins/download'
 
 export default {
   name: "Conditions",
+  mixins: [DownloadMixin],
   components: {
     AssessmentPreview,
     CFilter,
@@ -73,7 +79,8 @@ export default {
       activePrefilter: (state) => state.assessments.activePrefilter,
       currentIndex: (state) => state.assessments.currentIndex,
       currentSlice: (state) => state.assessments.currentSlice,
-      listVisible: (state) => state.assessments.listVisible
+      listVisible: (state) => state.assessments.listVisible,
+      localDb: (state) => state.profile.localDb
     }),
     ...mapGetters("assessments", ["renderedList", "filteredCount"]),
     proposalsById() {
@@ -106,7 +113,7 @@ export default {
       this.$store.dispatch('assessments/getNext')
     },
     exportButton() {
-      alert('! Function not implemented')
+      alert(this.localDb)
     },
     incrementSlice() {
       this.$store.commit('assessments/incrementSlice')
