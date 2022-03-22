@@ -2,19 +2,28 @@
   <div
     class="assessment-preview columns is-multiline is-mobile"
     >
-    <div class="info column is-one-third">
+    <div class="info column is-one-quarter">
       <div class="label mr-2">Proposal:</div>
       <div class="value">{{proposal.title}}</div>
     </div>
-    <div class="info column is-one-third">
+    <div class="info column is-one-quarter">
       <div class="label mr-2">Average Rating: </div>
       <div class="value">
         <b-rate v-model="rating" disabled />
       </div>
     </div>
-    <div class="info column is-one-third">
+    <div class="info column is-one-quarter">
       <div class="label mr-2">Assessor:</div>
       <div class="value">{{assessment.assessor}}</div>
+    </div>
+    <div class="info column is-one-quarter">
+      <b-checkbox
+        class="always-opaque mb-3"
+        v-model="isFlagged"
+        type="is-warning"
+        disabled>
+        Flagged
+      </b-checkbox>
     </div>
     <div class="info mt-3 column is-full">
       <b-button
@@ -51,6 +60,13 @@ export default {
     },
     rating() {
       return Math.round((this.assessment.auditability_rating + this.assessment.feasibility_rating + this.assessment.impact_rating) / 3)
+    },
+    isFlagged() {
+      if (this.idx==1){
+        alert(this.assessment.id)
+        alert(this.assessment.not_valid)
+      }
+      return this.assessment.not_valid;
     },
   },
   methods: {
