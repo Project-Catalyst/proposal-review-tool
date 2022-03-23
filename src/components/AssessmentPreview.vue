@@ -2,7 +2,7 @@
   <div
     class="assessment-preview columns is-multiline is-mobile"
     >
-    <div class="info column is-one-quarter">
+    <div class="info column is-one-third">
       <div class="label mr-2">Proposal:</div>
       <div class="value">{{proposal.title}}</div>
     </div>
@@ -16,14 +16,21 @@
       <div class="label mr-2">Assessor:</div>
       <div class="value">{{assessment.assessor}}</div>
     </div>
-    <div class="info column is-one-quarter">
-      <b-checkbox
+    <div class="info column"
+      v-if="assessment.not_valid">
+      <!-- <b-checkbox
         class="always-opaque mb-3"
         v-model="assessment.not_valid"
         type="is-warning"
         disabled>
         Filtered out
-      </b-checkbox>
+      </b-checkbox> -->
+      <b-icon
+          icon="flag"
+          size="is-medium"
+          type="is-danger">
+      </b-icon>
+      <em>Review requested</em>
     </div>
     <div class="info mt-3 column is-full">
       <b-button
