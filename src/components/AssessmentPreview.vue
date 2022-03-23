@@ -18,13 +18,6 @@
     </div>
     <div class="info column"
       v-if="assessment.not_valid">
-      <!-- <b-checkbox
-        class="always-opaque mb-3"
-        v-model="assessment.not_valid"
-        type="is-warning"
-        disabled>
-        Filtered out
-      </b-checkbox> -->
       <b-icon
           icon="flag"
           size="is-medium"

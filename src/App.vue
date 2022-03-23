@@ -8,25 +8,27 @@
       </template>
       <template #end>
         <b-navbar-dropdown label="Proposal Review Tool">
-          <b-navbar-item tag="router-link" :to="{ name: 'profile' }">
+          <b-navbar-item 
+            tag="router-link" :to="{ name: 'profile' }">
             Profile
           </b-navbar-item>
           <b-navbar-item
-            tag="router-link"
-            :to="{ name: 'conditions' }"
             v-if="profile.localDb"
-          >
+            tag="router-link" :to="{ name: 'conditions' }">
             Assessments
           </b-navbar-item>
-          <b-navbar-item @click="exportCsv" v-if="profile.localDb">
+          <b-navbar-item 
+            v-if="profile.localDb"
+            @click="exportCsv">
             Export CSV
           </b-navbar-item>
-          <b-navbar-item tag="router-link" :to="{ name: 'home' }"> <!--Insert here the router name to the Instructions page -->
+          <b-navbar-item 
+            tag="router-link" :to="{ name: 'home' }"> 
             Instructions
           </b-navbar-item>
-          <!--<b-navbar-item tag="router-link" :to="{ name: 'stats' }">
+          <!-- <b-navbar-item tag="router-link" :to="{ name: 'stats' }">
             Statistics
-          </b-navbar-item>-->
+          </b-navbar-item> -->
         </b-navbar-dropdown>
       </template>
     </b-navbar>

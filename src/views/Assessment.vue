@@ -1,13 +1,5 @@
 <template>
-  <b-modal class="assessment"
-    :key="`modal-${assessment.id}`"
-    :ref="'modal'"
-    v-model="isOpen"
-    :can-cancel="false"
-    :animation="'no-animation'"
-    full-screen
-    >
-    <div class="card container custom-card" v-if="fullAssessment">
+    <div class="assessment card container custom-card" v-if="fullAssessment">
       <div class="card-content">
         <p class="title is-4">
           {{ fullAssessment.title }} <span class="is-size-5 has-text-weight-bold">(<a :href="fullAssessment.url" target="_blank">See proposal in IdeaScale</a>)</span>
@@ -73,34 +65,36 @@
             </b-tag>
           </section>
         </div>
-      </div>
-      <footer class="card-footer custom-footer">
-        <b-tooltip multilined type="is-warning is-light"
-          :active="!navigationAvailable">
-          <router-link class="card-footer-item"
-            :to="{ name: 'conditions' }"
-            :class="{'link-disabled': !navigationAvailable}">
-            Assessments list / Overview
-          </router-link>
-          <template v-slot:content>
-            Please fill all the required fields to continue.
-          </template>
-        </b-tooltip>
 
-        <b-tooltip multilined type="is-warning is-light"
-          :active="!navigationAvailable">
-          <a @click="getNext"
-            class="card-footer-item"
-            :class="{'link-disabled': !navigationAvailable}">
-            Next
-          </a>
-          <template v-slot:content>
-            Please fill all the required fields to continue.
-          </template>
-        </b-tooltip>
-      </footer>
+        <div class="columns is-centered">
+          <b-tooltip multilined 
+            type="is-warning is-light"
+            label="Please fill all the required fields to continue."
+            position="is-bottom"
+            :active="!navigationAvailable">
+            <b-button class="button mr-3 mt-3 is-primary is-light"
+              type="is-primary"
+              tag="router-link" :to="{ name: 'conditions' }"
+              :disabled="!navigationAvailable">
+              Assessments list / Overview
+            </b-button>
+          </b-tooltip>
+          <b-tooltip multilined 
+            type="is-warning is-light"
+            label="Please fill all the required fields to continue."
+            position="is-bottom"
+            :active="!navigationAvailable">
+            <b-button class="button mr-3 mt-3 is-primary"
+              type="is-primary"
+              @click="getNext"
+              :disabled="!navigationAvailable">
+              Next
+            </b-button>
+          </b-tooltip>
+        </div>
+      
+      </div>
     </div>
-  </b-modal>
 </template>
 
 <script>
