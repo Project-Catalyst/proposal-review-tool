@@ -21,12 +21,11 @@
             >{{ showListLabel }}</b-button
           >
           <b-button
+            v-if="localDb"
             type="is-primary"
             inverted
             outlined 
-            v-if="localDb"
-            @click="exportCsv"
-            >
+            @click="exportCsv">
             Save / Export CSV</b-button>
         </div>
       </div>
@@ -111,9 +110,6 @@ export default {
     },
     getNext() {
       this.$store.dispatch('assessments/getNext')
-    },
-    exportButton() {
-      alert(this.localDb)
     },
     incrementSlice() {
       this.$store.commit('assessments/incrementSlice')

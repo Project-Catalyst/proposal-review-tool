@@ -22,7 +22,7 @@
         v-model="assessment.not_valid"
         type="is-warning"
         disabled>
-        Flagged
+        Filtered out
       </b-checkbox>
     </div>
     <div class="info mt-3 column is-full">

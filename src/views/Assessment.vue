@@ -62,7 +62,7 @@
             <b-field
               :type="(!navigationAvailable) ? 'is-danger' : ''"
               :message="(!navigationAvailable) ? 'Please fill out this field.' : ''"
-              label="Your rationale for the report OR your feedback to CA if not reported:">
+              label="Provide your rationale for reporting OR your feedback to CA if not reported:">
               <b-input
                 type="textarea"
                 @keydown.native="saveStatus = 'Saving...'"
