@@ -33,8 +33,11 @@ const getters = {
     })
     return result
   },
-  fullAssessments: () => {
-    return originalAssessments.filter(
+  fullAssessments: (state, _, rootState, rootGetters) => {
+    return originalAssessments.map(item => ({
+      ...item,
+      ...rootGetters['assessments/indexed'][item.id]
+    })).filter(
       (el) => (!el.blank)
     );
   },

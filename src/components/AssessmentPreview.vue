@@ -19,7 +19,7 @@
     <div class="info column is-one-quarter">
       <b-checkbox
         class="always-opaque mb-3"
-        v-model="isFlagged"
+        v-model="assessment.not_valid"
         type="is-warning"
         disabled>
         Flagged
@@ -60,14 +60,7 @@ export default {
     },
     rating() {
       return Math.round((this.assessment.auditability_rating + this.assessment.feasibility_rating + this.assessment.impact_rating) / 3)
-    },
-    isFlagged() {
-      if (this.idx==1){
-        alert(this.assessment.id)
-        alert(this.assessment.not_valid)
-      }
-      return this.assessment.not_valid;
-    },
+    }
   },
   methods: {
     goTo() {

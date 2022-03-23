@@ -153,8 +153,6 @@ export default {
     },
     review: {
       get() {
-        alert(this.assessment.id)
-        alert(this.assessment.not_valid)
         return this.assessment.not_valid
       },
       set(val) {
