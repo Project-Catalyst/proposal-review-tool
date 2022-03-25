@@ -58,12 +58,12 @@
           </li>
           <li>
             This is the final file that you'll have to share at the end of the QA process. This file file can also be re-imported in the proposal-review-tool to edit/check/continue your reviews.<br />
-            Upload the final export to Google Docs, raname it including you proposal title, change the share settings to "Anyone with the link" and fill in <a href="https://forms.gle/qDXnga4EX1aVsPoB6" target="_blank">this form</a> with your details and the link to your file.
+            Upload the final export to Google Docs, raname it including you proposal title, change the share settings to "Anyone with the link" and fill in <a href="https://forms.gle/Jor2vitCNzpab67Z6" target="_blank">this form</a> with your details and the link to your file.
           </li>
         </ol>
         <p><b>Useful resources</b><br /></p>
         <p>
-          <a href="https://docs.google.com/document/d/1vHapUV1LHM4cb2375V99oM32xJ-wj_XoN-DYcvKEk0A/edit?usp=sharing" target="_blank">QA Stage Guide</a><br />
+          <a href="https://docs.google.com/document/d/1NNnIW8Z6XFQ0WEYBOSGv2LsQTN7Goai0omOn0hjL9zk" target="_blank">Proposal Review & Assess QA</a><br />
           <a href="https://docs.google.com/document/d/1g-iZhDlKhUBZkui1uv8NVNfJC4oVD3JtR-P6Fue7XPU" target="_blank">Community Advisor Assessment Guide</a><br />
           <a href="https://t.me/catalystproposers" target="_blank">Catalyst Proposer Telegram chat.</a>
         </p>
