@@ -11,7 +11,7 @@ const download = {
   computed: {
     ...mapState({
       profile: (state) => state.profile,
-      assessments: (state) => state.assessments.all,
+      downloadAssessments: (state) => state.assessments.all,
     })
   },
   methods: {
@@ -20,8 +20,7 @@ const download = {
       this.originalAssessments.forEach(el => {
         originalAssessmentsIndexed[el.id] = el
       })
-      console.log(this.assessments)
-      const assessmentsExport = this.assessments.map(item => ({
+      const assessmentsExport = this.downloadAssessments.map(item => ({
         ...originalAssessmentsIndexed[item.id],
         ...item,
       }));
