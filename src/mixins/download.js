@@ -20,7 +20,6 @@ const download = {
       this.originalAssessments.forEach(el => {
         originalAssessmentsIndexed[el.id] = el
       })
-      console.log(this.assessments)
       const assessmentsExport = this.assessments.map(item => ({
         ...originalAssessmentsIndexed[item.id],
         ...item,
