@@ -11,7 +11,7 @@
         />
       </div>
       <div class="notification is-primary mb-6">
-        <div class="buttons">
+        <div class="buttons is-flex">
           <b-button type="is-primary" inverted @click="getNext">Next</b-button>
           <b-button
             type="is-primary"
@@ -20,13 +20,13 @@
             @click="toggleList"
             >{{ showListLabel }}</b-button
           >
-          <b-button
-            v-if="localDb"
-            type="is-primary"
-            inverted
-            outlined 
-            @click="exportCsv">
-            Save / Export CSV</b-button>
+          <div class="is-flex-grow-1">
+            <b-button
+              class="is-pulled-right"
+              v-if="localDb"
+              @click="exportCsv">
+              Export CSV</b-button>
+          </div>
         </div>
       </div>
       <div class="assessments-list" v-if="listVisible">
