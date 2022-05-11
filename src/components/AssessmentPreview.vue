@@ -1,6 +1,7 @@
 <template>
   <div
     class="assessment-preview columns is-multiline is-mobile"
+    :id="idx"
     >
     <div class="info column is-one-third">
       <div class="label mr-2">Proposal:</div>

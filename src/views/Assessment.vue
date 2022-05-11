@@ -74,7 +74,7 @@
             :active="!navigationAvailable">
             <b-button class="button mr-3 mt-3 is-primary is-light"
               type="is-primary"
-              tag="router-link" :to="{ name: 'conditions' }"
+              tag="router-link" :to="{ name: 'conditions', hash: `#${idx}`}"
               :disabled="!navigationAvailable">
               Assessments list / Overview
             </b-button>
@@ -119,6 +119,13 @@ export default {
     ...mapState({
       profile: (state) => state.profile
     }),
+    idx() {
+        if (this.$route.params.id > 1) {
+          return this.$route.params.id -2
+        } else {
+          return 0
+        }
+    },
     assessment() {
       return this.getById(this.$route.params.id)
     },
