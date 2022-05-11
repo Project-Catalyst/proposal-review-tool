@@ -17,14 +17,26 @@
       <div class="label mr-2">Assessor:</div>
       <div class="value">{{assessment.assessor}}</div>
     </div>
-    <div class="info column"
-      v-if="assessment.not_valid">
-      <b-icon
-          icon="flag"
-          size="is-medium"
-          type="is-danger">
-      </b-icon>
-      <em>Review requested</em>
+    <div class="column"
+      v-if="assessment.not_valid_rationale">
+      <div class="info"
+        v-if="assessment.not_valid">
+        <b-icon
+            icon="flag"
+            size="is-medium"
+            type="is-danger">
+        </b-icon>
+        <em>Review requested</em>
+      </div>
+      <div class="info"
+        v-else>
+        <b-icon
+            icon="flag"
+            size="is-medium"
+            type="is-warning">
+        </b-icon>
+        <em>Feedback provided</em>
+      </div>
     </div>
     <div class="info mt-3 column is-full">
       <b-button
