@@ -56,11 +56,12 @@
           </li>
           <li>
             This is the final file that you'll have to share at the end of the QA process. This file file can also be re-imported in the proposal-review-tool to edit/check/continue your reviews.<br />
-            Upload the final export to Google Docs, raname it including you proposal title, change the share settings to "Anyone with the link" and fill in <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5FPZEMIaKwk-YtnbLczN9J-0VlMJH-12xMC0ZRUJD8EsytQ" target="_blank">this form</a> with your details and the link to your file.
+            <b>Fill in <a href="https://forms.gle/sxnGfPek8Y4rXqQu7" target="_blank">this form</a> with your details and upload there the final CSV export you just download.</b>
           </li>
         </ol>
         <p><b>Useful resources</b><br /></p>
         <p>
+          <a href="https://catalyst-circle.gitbook.io/funded-proposers-hub/help-with-proposing-in-catalyst/a-proposers-guide-to-assessment-flagging-multi-lingual">A Proposer's Guide to Assessment Flagging (multi-lingual)</a><br />
           <a href="https://docs.google.com/document/d/1eSX455MCilIe247xRVi51UZLGfKGPBrxJthvtV5sASg/edit" target="_blank">veteran Proposal Assessors Guidelines</a><br />
           <a href="https://bit.ly/Catalyst-PA-Guide " target="_blank">Proposal Assessor Guide</a><br />
           <a href="https://t.me/catalystproposers" target="_blank">Catalyst Proposer Telegram chat.</a>
