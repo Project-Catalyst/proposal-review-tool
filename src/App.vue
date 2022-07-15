@@ -8,7 +8,7 @@
       </template>
       <template #end>
         <b-navbar-dropdown label="Proposal Review Tool">
-          <b-navbar-item 
+          <b-navbar-item
             tag="router-link" :to="{ name: 'profile' }">
             Profile
           </b-navbar-item>
@@ -17,13 +17,13 @@
             tag="router-link" :to="{ name: 'conditions' }">
             Assessments
           </b-navbar-item>
-          <b-navbar-item 
+          <b-navbar-item
             v-if="profile.localDb"
             @click="exportCsv">
             Export CSV
           </b-navbar-item>
-          <b-navbar-item 
-            tag="router-link" :to="{ name: 'home' }"> 
+          <b-navbar-item
+            tag="router-link" :to="{ name: 'home' }">
             Instructions
           </b-navbar-item>
           <!-- <b-navbar-item tag="router-link" :to="{ name: 'stats' }">
@@ -59,7 +59,14 @@ export default {
   mixins: [DownloadMixin],
   mounted() {
     if (window.localStorage) {
-      let oldKeys = ['vca-tool-f4', 'vca-tool-f5', 'vca-tool-f6']
+      let oldKeys = [
+        'vca-tool-f4-default',
+        'vca-tool-f5-default',
+        'vca-tool-f6-default',
+        'vca-tool-f7-default',
+        'vca-tool-f8-default',
+        'proposal-review-tool-f6-default',
+      ]
       oldKeys.forEach((k) => {
         let oldKey = window.localStorage.getItem(k)
         if (oldKey) {

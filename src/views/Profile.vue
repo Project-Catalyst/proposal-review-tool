@@ -143,21 +143,6 @@ export default {
       })
       this.csv = results;
     },
-    transformData(value, col) {
-      if (this.csvHeaders[col]) {
-        if (this.csvHeaders[col].type === 'integer') {
-          return parseInt(value)
-        }
-        if (this.csvHeaders[col].type === 'boolean') {
-          return (value.trim() !== '')
-        }
-        if (this.csvHeaders[col].type === 'string') {
-          return value
-        }
-      } else {
-        return value
-      }
-    },
     transformHeader(header) {
       const newHeaders = {}
       Object.keys(this.csvHeaders).forEach((h) => {
@@ -170,10 +155,12 @@ export default {
     },
     readFile(file) {
       this.$papa.parse(file, {
-        header: true,
         complete: this.onComplete,
-        transform: this.transformData,
         transformHeader: this.transformHeader,
+        error: this.errorHandling,
+
+        dynamicTyping: true,
+        header: true,
         skipEmptyLines: true
       });
     },

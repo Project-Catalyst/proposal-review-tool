@@ -27,6 +27,10 @@ csvHeaders = JSON.parse(`{
     "type": "integer",
     "label": "proposal_id"
   },
+  "challenge_id": {
+    "type": "integer",
+    "label": "challenge_id"
+  },
   "impact_note": {
     "type": "string",
     "label": "Impact / Alignment Note"
@@ -69,9 +73,6 @@ const transformData = function(value, col) {
   if (csvHeaders[col]) {
     if (csvHeaders[col].type === 'integer') {
       return parseInt(value)
-    }
-    if (csvHeaders[col].type === 'boolean') {
-      return (value.trim() !== '')
     }
     if (csvHeaders[col].type === 'string') {
       return value
