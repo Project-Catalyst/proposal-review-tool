@@ -20,10 +20,16 @@ const download = {
       this.originalAssessments.forEach(el => {
         originalAssessmentsIndexed[el.id] = el
       })
-      const assessmentsExport = this.downloadAssessments.map(item => ({
-        ...originalAssessmentsIndexed[item.id],
-        ...item,
-      }));
+      const assessmentsExport = this.downloadAssessments.map((item) => {
+        let newItem = {
+          ...originalAssessmentsIndexed[item.id],
+          ...item,
+        };
+        if (!Object.prototype.hasOwnProperty.call(newItem, 'not_valid')) {
+          newItem['not_valid'] = false
+        }
+        return newItem;
+      })
       downloadCsv(assessmentsExport, this.profile.info.name)
     }
   },
